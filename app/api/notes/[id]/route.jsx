@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request, { params }) {
 try {
     
-    const { id } = params;
+    const { id } = await params;
     await dbConnect();
     const body = await request.json();
     const note = await Note.findByIdAndUpdate(id,
@@ -26,7 +26,7 @@ try {
 
 export async function DELETE(request, { params }) {
     try {
-        const { id } = params;
+        const { id } = await params;
         await dbConnect();
         const note = await Note.findByIdAndDelete(id);
         if (!note) {
