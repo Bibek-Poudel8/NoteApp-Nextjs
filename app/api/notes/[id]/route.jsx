@@ -26,7 +26,7 @@ try {
 
 export async function DELETE(request, { params }) {
     try {
-        const { id } = await params;
+        const { id } = params;
         await dbConnect();
         const note = await Note.findByIdAndDelete(id);
         if (!note) {
