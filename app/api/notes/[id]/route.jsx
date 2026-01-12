@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request, { params }) {
 try {
     
-    const { id } = await params;
+    const { id } = params;
     await dbConnect();
     const body = await request.json();
     const note = await Note.findByIdAndUpdate(id,
