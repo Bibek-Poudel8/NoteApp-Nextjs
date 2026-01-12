@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Subtle global polish */
+::selection {
+	background: #eef2ff; /* indigo-50 */
+	color: #1f2937; /* gray-800 */
+}
+
+.dark ::selection {
+	background: #3730a3; /* indigo-800 */
+	color: #e0e7ff; /* indigo-100 */
+}
+
+/* Smooth scroll behavior */
+html, body {
+	scroll-behavior: smooth;
+}
+
+/* Minimal scrollbar styling */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #e5e7eb transparent; /* gray-200 */
+}
+*::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+	background-color: #e5e7eb; /* gray-200 */
+	border-radius: 999px;
+}

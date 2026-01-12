@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
+import ThemeToggle from "@/components/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,12 +25,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;var d=s?s==='dark':p;document.documentElement.classList.toggle('dark',d);}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-indigo-50 via-white to-violet-50 text-gray-900 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 dark:text-gray-100`}
+        suppressHydrationWarning
       >
         <Toaster/>
-        {children}
+        <header className="sticky top-0 z-30 backdrop-blur bg-white/70 ring-1 ring-gray-200 dark:bg-gray-900/60 dark:ring-gray-700">
+          <div className="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow">N</span>
+              <span className="font-semibold tracking-tight">Notes</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:block text-xs text-gray-500 dark:text-gray-400">Capture. Edit. Remember.</div>
+              <ThemeToggle />
+            </div>
+          </div>
+        </header>
+        <main className="mx-auto max-w-5xl px-4 py-8">
+          {children}
+        </main>
       </body>
     </html>
   );
