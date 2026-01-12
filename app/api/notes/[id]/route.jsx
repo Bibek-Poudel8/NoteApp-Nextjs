@@ -37,5 +37,3 @@ export async function DELETE(request, { params }) {
         return NextResponse.json({ success:false, message: "Failed to delete note", error: error.message }, { status: 500 });
     }
 }
-
-//test
